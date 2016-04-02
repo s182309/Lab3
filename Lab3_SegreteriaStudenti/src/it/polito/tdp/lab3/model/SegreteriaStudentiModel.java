@@ -1,5 +1,7 @@
 package it.polito.tdp.lab3.model;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +22,9 @@ public class SegreteriaStudentiModel {
 	   }
 	
 	public List <Corso> caricaCorsi(){
-		return dao.caricaCorsi();
+		List<Corso> temp = new LinkedList<Corso>(dao.caricaCorsi());
+		Collections.sort(temp , new Corso.ComparatoreCorsi());
+		return temp;
 	}
 	
 	
@@ -30,6 +34,14 @@ public class SegreteriaStudentiModel {
 	
 	public List<Corso> cercaStudente (Studente s){
 		return dao.cercaStudente(s);
+	}
+	
+	public boolean cercaIscrizione(Studente s , Corso c){
+		return dao.cercaIscrizione(s, c);
+	}
+	
+	public boolean iscrivi (Studente s , Corso c){
+		return dao.iscrivi(s, c);
 	}
 	
 	public static void main (String[] args) {

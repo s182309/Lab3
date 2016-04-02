@@ -1,5 +1,6 @@
 package it.polito.tdp.lab3.model;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,11 +48,13 @@ public class Studente {
 		return matricola+"  "+nome+"  "+cognome+"  "+cds;
 	}
 	
-	
+	static class ComparatoreStudenti implements Comparator<Studente> {
+
+		public int compare(Studente s1, Studente s2) {
+			return s1.getMatricola().compareTo(s2.getMatricola());
+		}
+	}
 
 
 	
-	
-	
-
 }

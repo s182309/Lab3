@@ -139,10 +139,60 @@ public class SegreteriaStudentiDAO {
 		
 	}
 
+	public boolean cercaIscrizione (Studente s , Corso c){
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+			Statement st = conn.createStatement();
+			String sql = "select matricola , codins from iscrizione where matricola='"
+			 +s.getMatricola()+"' and codins = '"+c.getCodiceCorso()+"'";
+			ResultSet res = st.executeQuery(sql);
+			
+			if(res.next()){
+				res.close();
+				conn.close();
+				return true;
+			}
+			else
+			{
+				res.close();
+				conn.close();
+				return false;
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 	
 	
-	
-	
+	public boolean iscrivi(Studente s , Corso c){
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+			Statement st = conn.createStatement();
+			String search = "select matricola , codins from iscrizione where matricola='"+s.getMatricola()+"' and codins='"
+					+c.getCodiceCorso()+"'";
+			ResultSet r = st.executeQuery(search);
+			if(r.next())
+				return false;
+			else{
+			String sql = "INSERT INTO iscritticorsi . iscrizione (matricola , codins) VALUES ('"+s.getMatricola()+"' , '"+c.getCodiceCorso()+"')";
+			int res = st.executeUpdate(sql);
+
+			conn.close();
+
+			if (res == 1)
+				return true;
+			else
+				return false; }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	
 	

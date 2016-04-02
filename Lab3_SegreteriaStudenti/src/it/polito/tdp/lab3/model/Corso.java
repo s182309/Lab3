@@ -1,7 +1,9 @@
 package it.polito.tdp.lab3.model;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class Corso {
 	
@@ -62,6 +64,13 @@ public class Corso {
 		return codiceCorso+" "+crediti+" "+nomeCorso+" pd:"+pd;
 	}
 	
+	static class ComparatoreCorsi implements Comparator<Corso> {
+
+		public int compare(Corso c1, Corso c2) {
+			return c1.getNomeCorso().compareTo(c2.getNomeCorso());
+		}
+	}
+		
 	
 
 }
