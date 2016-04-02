@@ -1,11 +1,16 @@
 package it.polito.tdp.lab3.controller;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.lab3.model.Corso;
 import it.polito.tdp.lab3.model.SegreteriaStudentiModel;
 import it.polito.tdp.lab3.model.Studente;
 import javafx.event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -23,7 +28,7 @@ public class SegreteriaStudentiController {
     private URL location;
 
     @FXML
-    private ComboBox<?> box;
+    private ComboBox<Corso> box;
 
     @FXML
     private TextField txtInput;
@@ -39,6 +44,7 @@ public class SegreteriaStudentiController {
     
     public void setModel(SegreteriaStudentiModel model){
     	this.model = model ;
+    	 box.getItems().addAll(model.caricaCorsi());
     }
 
     @FXML
@@ -96,7 +102,6 @@ public class SegreteriaStudentiController {
         assert txtNome != null : "fx:id=\"txtNome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert txtCognome != null : "fx:id=\"txtCognome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert txtOutput != null : "fx:id=\"txtOutput\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
-
-    }
+     }
 }
 
