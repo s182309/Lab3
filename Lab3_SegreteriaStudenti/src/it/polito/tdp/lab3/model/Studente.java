@@ -8,14 +8,14 @@ public class Studente {
 	private String matricola;
 	private String nome;
 	private String cognome;
-	private Set <Corso> corsi;
+	private String cds;
 	
-	public Studente(String matricola, String nome, String cognome) {
+	public Studente(String matricola, String nome, String cognome , String cds) {
 		super();
 		this.matricola = matricola;
 		this.nome = nome;
 		this.cognome = cognome;
-		corsi = new HashSet <Corso>();
+		this.cds = cds;
 	}
 
 	public String getMatricola() {
@@ -42,14 +42,14 @@ public class Studente {
 		this.cognome = cognome;
 	}
 
-	public Set<Corso> getCorsi() {
-		return corsi;
-	}
-
-	public void setCorsi(Set<Corso> corsi) {
-		this.corsi = corsi;
+	@Override
+	public String toString() {
+		return matricola+"  "+nome+"  "+cognome+"  "+cds;
 	}
 	
+	
+
+
 	
 	
 	

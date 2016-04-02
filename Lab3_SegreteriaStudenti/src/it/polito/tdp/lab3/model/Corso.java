@@ -9,7 +9,6 @@ public class Corso {
 	private String crediti;
 	private String nomeCorso;
 	private String pd;
-	private Set <Studente> studentiIscritti;
 	
 
 	public Corso(String codiceCorso, String crediti, String nomeCorso, String pd) {
@@ -18,7 +17,6 @@ public class Corso {
 		this.crediti = crediti;
 		this.nomeCorso = nomeCorso;
 		this.pd = pd;
-		studentiIscritti = new HashSet <Studente>();
 		
 	}
 
@@ -30,13 +28,6 @@ public class Corso {
 		this.codiceCorso = codiceCorso;
 	}
 
-	public Set<Studente> getStudentiIscritti() {
-		return studentiIscritti;
-	}
-
-	public void setStudentiIscritti(Set<Studente> studentiIscritti) {
-		this.studentiIscritti = studentiIscritti;
-	}
 
 	public String getCrediti() {
 		return crediti;
@@ -67,7 +58,9 @@ public class Corso {
 		return nomeCorso;
 	}
 	
-	
+	public String stampaCompleta(){
+		return codiceCorso+" "+crediti+" "+nomeCorso+" pd:"+pd;
+	}
 	
 	
 
