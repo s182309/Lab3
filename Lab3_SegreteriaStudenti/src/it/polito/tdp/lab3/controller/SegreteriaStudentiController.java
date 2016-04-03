@@ -3,6 +3,7 @@ package it.polito.tdp.lab3.controller;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.lab3.model.Corso;
@@ -82,6 +83,7 @@ public class SegreteriaStudentiController {
 				txtOutput.setText("Nessuno studente è iscritto a questo corso");
 				return;
 			}
+			
 			txtOutput.setText(txt);
 			return;
 		}
@@ -150,9 +152,14 @@ public class SegreteriaStudentiController {
 				txtCognome.clear();
 				return;
 			} else {
+				String nome;
+				String cognome;
+				nome= String.valueOf(st.getNome().charAt(0)).toUpperCase().concat(st.getNome().substring(1).toLowerCase());
+				cognome = String.valueOf(st.getCognome().charAt(0)).toUpperCase().concat(st.getCognome().substring(1).toLowerCase());
+				String.valueOf(cognome.charAt(0)).toUpperCase();
 				txtOutput.setText("");
-				txtNome.setText(st.getNome());
-				txtCognome.setText(st.getCognome());
+				txtNome.setText(nome);
+				txtCognome.setText(cognome);
 			}
 
 		}
@@ -192,7 +199,7 @@ public class SegreteriaStudentiController {
 		}
 		else{
 			out= "Impossibile iscrivere lo studente "+txtNome.getText()+" "+txtCognome.getText()+" al corso di \""
-					+box.getValue().getNomeCorso()+"\", lo studente è già iscritto a questo corso";
+					+box.getValue().getNomeCorso()+"\",\nlo studente è già iscritto al corso";
 			txtOutput.setText(out);
 			return;
 		}
