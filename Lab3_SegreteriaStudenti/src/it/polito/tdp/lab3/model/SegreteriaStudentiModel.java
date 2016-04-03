@@ -44,10 +44,12 @@ public class SegreteriaStudentiModel {
 		return dao.iscrivi(s, c);
 	}
 	
+
 	public static void main (String[] args) {
 		SegreteriaStudentiModel seg = new SegreteriaStudentiModel();
 		System.out.println(seg.cerca("146101").getNome()+" "+seg.cerca("146101").getCognome()) ;
 		System.out.println("\n"+seg.caricaCorsi());
+		
 	}
 
 }

@@ -48,6 +48,12 @@ public class Studente {
 		return matricola+"  "+nome+"  "+cognome+"  "+cds;
 	}
 	
+	
+	public String getCds() {
+		return cds;
+	}
+
+
 	static class ComparatoreStudenti implements Comparator<Studente> {
 
 		public int compare(Studente s1, Studente s2) {

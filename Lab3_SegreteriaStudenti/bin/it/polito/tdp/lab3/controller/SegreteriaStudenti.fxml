@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab3.controller.SegreteriaStudentiController">
    <center>
@@ -53,10 +54,13 @@
                   </Button>
                </children>
             </HBox>
-            <TextArea fx:id="txtOutput" editable="false">
+            <TextArea fx:id="txtOutput" editable="false" nodeOrientation="LEFT_TO_RIGHT">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
             </TextArea>
             <HBox alignment="TOP_RIGHT">
                <children>

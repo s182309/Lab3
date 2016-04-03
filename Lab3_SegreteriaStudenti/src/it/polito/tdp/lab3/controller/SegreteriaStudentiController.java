@@ -73,18 +73,15 @@ public class SegreteriaStudentiController {
 
 		// primo caso: cerco gli studenti iscritti ad un determinato corso (input vuoto..corso selezionato o non vuoto)
 		if (txtInput.getText().length() == 0 && box.getValue() != corsoVuoto) {
+			double start = System.nanoTime();
 			txtNome.clear();
 			txtCognome.clear();
 			String txt = "";
-			for (Studente s : model.cercaCorso(box.getValue())) {
-				txt += s.toString() + "\n";
-			}
-			if (txt.length() == 0) {
-				txtOutput.setText("Nessuno studente è iscritto a questo corso");
-				return;
-			}
-			
+			txt = this.stampaStudenti(box.getValue());
 			txtOutput.setText(txt);
+			double end = System.nanoTime();
+			double time = (double) (end-start)/1e9 ;
+			System.out.println(time);
 			return;
 		}
 
@@ -93,13 +90,7 @@ public class SegreteriaStudentiController {
 			try {
 				this.doComplete(event);
 				String txt = "";
-				for (Corso c : model.cercaStudente(model.cerca(txtInput.getText()))) {
-					txt += c.stampaCompleta() + "\n";
-				}
-				if (txt.length() == 0) {
-					txtOutput.setText("Lo studente non è iscritto ai corsi");
-					return;
-				}
+				txt = this.stampaCorsi(model.cerca(txtInput.getText()));
 				txtOutput.setText(txt);
 				return;
 			} catch (Exception e) {
@@ -237,5 +228,64 @@ public class SegreteriaStudentiController {
 			}
 		}
 		return true;
+	}
+	
+	public String stampaStudenti (Corso c){
+		String result = "" ;
+		int maxNome=0;
+		int maxCognome=0;
+		for(Studente s : model.cercaCorso(c)){
+			
+			if(s.getNome().length() > maxNome)
+				maxNome = s.getNome().length();
+			
+			if(s.getCognome().length() > maxCognome)
+				maxCognome = s.getCognome().length();
+		}
+		for(Studente s : model.cercaCorso(c)){
+			int differenzaNome = maxNome - s.getNome().length() + 1;
+			int differenzaCognome = maxCognome - s.getCognome().length() + 1;
+			result += s.getMatricola()+"  "+s.getNome();
+			for(int i=0 ; i < differenzaNome  ; i++)
+				result += " ";
+			result += s.getCognome();
+			for(int i=0 ; i< differenzaCognome ; i++)
+				result += " ";
+			result += s.getCds()+"\n";
+					
+		}
+		
+		return result;
+		
+	}
+	
+	public String stampaCorsi(Studente s){
+		String result="";
+		int maxCod=0;
+		int maxNome=0;
+		int cifraCrediti =1;
+		for(Corso c: model.cercaStudente(s)){
+		if(c.getNomeCorso().length()>maxNome)
+		maxNome = c.getNomeCorso().length();
+		
+		if(c.getCodiceCorso().length()>maxCod)
+			maxCod = c.getCodiceCorso().length();
+		if(Integer.parseInt(c.getCrediti())>9)
+			cifraCrediti = 2;
+		}
+		
+		for(Corso c : model.cercaStudente(s)){
+			result += c.getCodiceCorso();
+			for(int i=0; i< maxCod - c.getCodiceCorso().length() + 2 ; i++)
+				result += " ";
+			result += c.getCrediti();
+			for(int i=0 ; i<cifraCrediti - c.getCrediti().length() +2; i++)
+				result += " ";
+			result += c.getNomeCorso();
+			for(int i=0 ; i <maxNome - c.getNomeCorso().length() + 2 ; i++)
+				result += " ";
+			result += "pd:"+c.getPd()+"\n";
+		}
+		return result;
 	}
 }
